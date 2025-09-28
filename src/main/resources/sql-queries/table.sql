@@ -2,3 +2,11 @@ CREATE TABLE IF NOT EXISTS category(
 	id SERIAL PRIMARY KEY,
 	title VARCHAR UNIQUE NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS product(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR UNIQUE NOT NULL,
+	quantity INT,
+	category_id INT,
+	CONSTRAINT category_id_fk FOREIGN KEY (category_id) REFERENCES category(id)
+);
