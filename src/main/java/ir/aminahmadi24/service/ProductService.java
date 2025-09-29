@@ -1,7 +1,11 @@
 package ir.aminahmadi24.service;
 
+import ir.aminahmadi24.DynamicArray;
+import ir.aminahmadi24.dto.SimpleProduct;
 import ir.aminahmadi24.model.Product;
 import ir.aminahmadi24.repository.ProductRepository;
+
+import java.util.List;
 
 public class ProductService {
     private final ProductRepository productRepository;
@@ -21,5 +25,9 @@ public class ProductService {
         if(product == null)
             return -1;
         return productRepository.removeById(id);
+    }
+
+    public List<SimpleProduct> findByName(String name) throws Exception {
+        return productRepository.findByName(name);
     }
 }

@@ -1,12 +1,17 @@
 package ir.aminahmadi24.repository;
 
+import ir.aminahmadi24.DynamicArray;
+import ir.aminahmadi24.dto.SimpleProduct;
 import ir.aminahmadi24.model.Product;
 import ir.aminahmadi24.utility.JdbcConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ProductRepository {
 
@@ -21,6 +26,7 @@ public class ProductRepository {
         JdbcConnection.closeResources(connection, preparedStatement);
         return result;
     }
+
     public boolean isExistsProductByName(String name) throws Exception {
         Connection connection = JdbcConnection.getConnection();
         String query = "SELECT * FROM product WHERE name = ?";
@@ -61,12 +67,29 @@ public class ProductRepository {
         ResultSet resultSet = preparedStatement.executeQuery();
         boolean result = resultSet.next();
         Product product = null;
-        if(result){
+        if (result) {
             product = new Product(resultSet.getString("name"),
                     resultSet.getInt("quantity"), resultSet.getInt("category_id"));
         }
         JdbcConnection.closeResources(connection, preparedStatement, resultSet);
         return product;
 
+    }
+
+    public List<SimpleProduct> findByName(String name) throws Exception {
+        String query = "SELECT * FROM product WHERE name ILIKE ?";
+        Connection connection = JdbcConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, "%" + name + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<SimpleProduct> products = new ArrayList<>();
+        while (resultSet.next()) {
+            SimpleProduct product = new SimpleProduct(resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("quantity"));
+            products.add(product);
+        }
+        JdbcConnection.closeResources(connection, preparedStatement, resultSet);
+        return products;
     }
 }
