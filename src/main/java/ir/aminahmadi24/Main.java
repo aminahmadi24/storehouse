@@ -64,9 +64,18 @@ public class Main {
 //        }
 
         // decrease quantity
+//        ProductService productService = new ProductService(new ProductRepository());
+//        try{
+//            System.out.println(productService.decreaseQuantity(9, 80));
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+
+        // get all quantity
         ProductService productService = new ProductService(new ProductRepository());
         try{
-            System.out.println(productService.decreaseQuantity(9, 80));
+            System.out.println(productService.getAllQuantity());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

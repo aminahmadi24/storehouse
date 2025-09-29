@@ -37,4 +37,8 @@ public class ProductService {
     public int decreaseQuantity(int id, int newQuantity) throws Exception {
         return productRepository.decreaseQuantityById(id, newQuantity);
     }
+
+    public int getAllQuantity() throws Exception {
+        return productRepository.getAllQuantity();
+    }
 }

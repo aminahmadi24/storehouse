@@ -114,4 +114,15 @@ public class ProductRepository {
         JdbcConnection.closeResources(connection, preparedStatement);
         return result;
     }
+    public int getAllQuantity() throws Exception {
+        String query = "SELECT SUM(quantity) as sum FROM product";
+        Connection connection = JdbcConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next()){
+            return resultSet.getInt("sum");
+        }
+        return 0;
+    }
 }
