@@ -15,4 +15,11 @@ public class ProductService {
             return -2;
         return productRepository.add(product);
     }
+
+    public int removeById(int id) throws Exception {
+        Product product = productRepository.findById(id);
+        if(product == null)
+            return -1;
+        return productRepository.removeById(id);
+    }
 }

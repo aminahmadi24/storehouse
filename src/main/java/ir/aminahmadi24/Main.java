@@ -23,13 +23,22 @@ public class Main {
 //            System.out.println(e.getMessage());
 //        }
 
-        // add a product
-        ProductService productService = new ProductService(new ProductRepository());
-        Product product = new Product("iPhone13", 12, 3);
-        try{
-            int result = productService.add(product);
-            System.out.println(result);
+//         add a product
+//        ProductService productService = new ProductService(new ProductRepository());
+//        Product product = new Product("washing machine", 55, 1);
+//        try{
+//            int result = productService.add(product);
+//            System.out.println(result);
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
 
+//         remove a product
+        ProductService productService = new ProductService(new ProductRepository());
+        try{
+            int result = productService.removeById(3);
+            System.out.println(result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

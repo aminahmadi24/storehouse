@@ -42,4 +42,31 @@ public class ProductRepository {
         JdbcConnection.closeResources(connection, preparedStatement, resultSet);
         return result;
     }
+
+    public int removeById(int id) throws Exception {
+        String query = "DELETE FROM product WHERE id = ?";
+        Connection connection = JdbcConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        int result = preparedStatement.executeUpdate();
+        JdbcConnection.closeResources(connection, preparedStatement);
+        return result;
+    }
+
+    public Product findById(int id) throws Exception {
+        String query = "SELECT * FROM product WHERE id = ?";
+        Connection connection = JdbcConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        boolean result = resultSet.next();
+        Product product = null;
+        if(result){
+            product = new Product(resultSet.getString("name"),
+                    resultSet.getInt("quantity"), resultSet.getInt("category_id"));
+        }
+        JdbcConnection.closeResources(connection, preparedStatement, resultSet);
+        return product;
+
+    }
 }
