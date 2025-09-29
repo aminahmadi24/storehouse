@@ -47,10 +47,18 @@ public class Main {
 //        }
 
         // find products
+//        ProductService productService = new ProductService(new ProductRepository());
+//        try{
+//            List<SimpleProduct> products = productService.findByName("s2");
+//            products.forEach((p) -> System.out.println(p));
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+        // increase quantity
         ProductService productService = new ProductService(new ProductRepository());
         try{
-            List<SimpleProduct> products = productService.findByName("s2");
-            products.forEach((p) -> System.out.println(p));
+            System.out.println(productService.increaseQuantity(55, 10));
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

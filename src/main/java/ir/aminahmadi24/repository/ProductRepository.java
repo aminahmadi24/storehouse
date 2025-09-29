@@ -1,6 +1,6 @@
 package ir.aminahmadi24.repository;
 
-import ir.aminahmadi24.DynamicArray;
+
 import ir.aminahmadi24.dto.SimpleProduct;
 import ir.aminahmadi24.model.Product;
 import ir.aminahmadi24.utility.JdbcConnection;
@@ -8,7 +8,7 @@ import ir.aminahmadi24.utility.JdbcConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,5 +91,16 @@ public class ProductRepository {
         }
         JdbcConnection.closeResources(connection, preparedStatement, resultSet);
         return products;
+    }
+
+    public int increaseQuantityById(int id, int newQuantity) throws Exception {
+        String query = "UPDATE product SET quantity = quantity + ? WHERE id = ?";
+        Connection connection = JdbcConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, newQuantity);
+        preparedStatement.setInt(2, id);
+        int result = preparedStatement.executeUpdate();
+        JdbcConnection.closeResources(connection, preparedStatement);
+        return result;
     }
 }

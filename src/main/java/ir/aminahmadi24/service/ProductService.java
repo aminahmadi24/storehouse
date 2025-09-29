@@ -1,6 +1,5 @@
 package ir.aminahmadi24.service;
 
-import ir.aminahmadi24.DynamicArray;
 import ir.aminahmadi24.dto.SimpleProduct;
 import ir.aminahmadi24.model.Product;
 import ir.aminahmadi24.repository.ProductRepository;
@@ -29,5 +28,9 @@ public class ProductService {
 
     public List<SimpleProduct> findByName(String name) throws Exception {
         return productRepository.findByName(name);
+    }
+
+    public int increaseQuantity(int id, int newQuantity) throws Exception {
+        return productRepository.increaseQuantityById(id, newQuantity);
     }
 }
