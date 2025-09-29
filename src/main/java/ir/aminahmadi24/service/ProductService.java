@@ -33,4 +33,8 @@ public class ProductService {
     public int increaseQuantity(int id, int newQuantity) throws Exception {
         return productRepository.increaseQuantityById(id, newQuantity);
     }
+
+    public int decreaseQuantity(int id, int newQuantity) throws Exception {
+        return productRepository.decreaseQuantityById(id, newQuantity);
+    }
 }

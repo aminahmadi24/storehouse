@@ -103,4 +103,15 @@ public class ProductRepository {
         JdbcConnection.closeResources(connection, preparedStatement);
         return result;
     }
+    public int decreaseQuantityById(int id, int newQuantity) throws Exception {
+        String query = "UPDATE product SET quantity = quantity - ? WHERE id = ? and quantity >= ?";
+        Connection connection = JdbcConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, newQuantity);
+        preparedStatement.setInt(2, id);
+        preparedStatement.setInt(3, newQuantity);
+        int result = preparedStatement.executeUpdate();
+        JdbcConnection.closeResources(connection, preparedStatement);
+        return result;
+    }
 }

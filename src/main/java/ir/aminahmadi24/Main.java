@@ -55,12 +55,22 @@ public class Main {
 //            System.out.println(e.getMessage());
 //        }
         // increase quantity
+//        ProductService productService = new ProductService(new ProductRepository());
+//        try{
+//            System.out.println(productService.increaseQuantity(55, 10));
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+
+        // decrease quantity
         ProductService productService = new ProductService(new ProductRepository());
         try{
-            System.out.println(productService.increaseQuantity(55, 10));
+            System.out.println(productService.decreaseQuantity(9, 80));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
